@@ -1,5 +1,5 @@
 # Fdb version 4
-["lualatex"] 1732076090.3152 "main.tex" "main.pdf" "main" 1732076092.3397 0
+["lualatex"] 1732081315.20073 "main.tex" "main.pdf" "main" 1732081317.99476 0
   "/home/datura/.texlive/texmf-var/luatex-cache/generic/fonts/otl/fontawesome5brands-regular-400.luc" 1716937357.58179 180102 1d230f377eed3582d314a631fb7b9e7f ""
   "/home/datura/.texlive/texmf-var/luatex-cache/generic/fonts/otl/fontawesome5free-solid-900.luc" 1716937357.49179 380927 29ce42dba44bce3a69a57a98de9fcb2e ""
   "/home/datura/.texlive/texmf-var/luatex-cache/generic/fonts/otl/lmroman10-regular.luc" 1716937357.24179 127314 93a7f4e01ddce5ae828f91a3dad3cc88 ""
@@ -401,9 +401,9 @@
   "/usr/share/texmf/tex/latex/minted/minted.sty" 1720826099 47156 7304be18b5469336f22dc013f16ae5cc ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1716926467.84788 5312047 b07fcd2a9090df96fc745b92a3db793b ""
   "/var/lib/texmf/web2c/luahbtex/lualatex.fmt" 1716926435 12260563 948952eba8ac2334052c6ce0cd7463af ""
-  "main.aux" 1732076092.14239 304 aacdead72e8f4b0d950893958674d93a "lualatex"
-  "main.tex" 1732076088.65904 1846 069666bb8cfff5aa0344106efcd8bf62 ""
-  "main.toc" 1732076092.04573 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
+  "main.aux" 1732081317.75505 304 aacdead72e8f4b0d950893958674d93a "lualatex"
+  "main.tex" 1732081315.02836 1856 f4f441e9d020b95dbd5a3531f6c888a0 ""
+  "main.toc" 1732081317.62505 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
   (generated)
   "main.aux"
   "main.log"
