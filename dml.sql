@@ -5,19 +5,20 @@ CREATE TABLE `contributor` (
 );
 
 
-CREATE TABLE `file` (
-  `file_id` int(32) NOT NULL,
-  `version` varchar(100) DEFAULT NULL,
-  `song_id` int(32) DEFAULT NULL,
-  PRIMARY KEY (`file_id`),
-  FOREIGN KEY (`song_id`) REFERENCES `song` (`song_id`)
-);
 
 CREATE TABLE `song` (
   `song_id` int(32) NOT NULL,
   `artist` varchar(100) NOT NULL,
   `title` varchar(100) NOT NULL,
   PRIMARY KEY (`song_id`)
+);
+
+CREATE TABLE `file` (
+  `file_id` int(32) NOT NULL,
+  `version` varchar(100) DEFAULT NULL,
+  `song_id` int(32) DEFAULT NULL,
+  PRIMARY KEY (`file_id`),
+  FOREIGN KEY (`song_id`) REFERENCES `song` (`song_id`)
 );
 
 CREATE TABLE `song_contributor` (
