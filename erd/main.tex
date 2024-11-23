@@ -58,14 +58,80 @@
     % \end{titlepage}
     \tableofcontents
     \pagebreak 
+    \unsect{Entity Relationship Diagram}
+    \bigbreak \noindent 
+    \fig{.6}{./figures/2.png}
+    \pagebreak 
+    \unsect{Erd Members}
+    \bigbreak \noindent 
+    \subsection{Entities}
+    \bigbreak \noindent 
+    \begin{itemize}
+        \item \textbf{User}: The user entity is used to store information about the users, such as name, email, and the users ID. The identifier is the users ID.
+        \item \textbf{Song}: The song entity is used to store information about the songs available for the user to select. Stores information about the song title, the name of the artist(s), and the songs ID. The identifier for this entity is the songs ID.
+        \item \textbf{Contributor}: The contributor entity is used to store information about people who have contributed to the creation of songs. Stores information about the name of the contributor, and the contributors ID. Identifier is contributors ID.
+        \item \textbf{Karaoke File}: The file entity is used to store information about the files associated with a specific song. Stores the files ID and the version. Identifier is the files ID.
+    \end{itemize}
+
+    \bigbreak \noindent 
+    \subsection{Attributes}
+    \begin{itemize}
+        \item \textbf{User}:
+            \begin{enumerate}
+                \item \textbf{Email}: The users email
+                \item \textbf{Name}: The users name
+                \item \textbf{ID}: The ID given to the user by the database
+            \end{enumerate}
+        \item \textbf{Song}:
+            \begin{enumerate}
+                \item \textbf{Artist\_name}: The name of the artist or group associated with the song
+                \item \textbf{Song\_id}: The Id given to the song by the database
+                \item \textbf{Title}: The title of the song
+            \end{enumerate}
+        \item \textbf{Contributor}:
+            \begin{enumerate}
+                \item \textbf{Id}: The ID given to the contributor by the database
+                \item \textbf{Name}: The name of the contributor
+            \end{enumerate}
+        \item \textbf{Karaoke File}:
+            \begin{enumerate}
+                \item \textbf{ID}: The Id given to the file by the database
+                \item \textbf{Version}: The name describing the version of the song
+            \end{enumerate}
+    \end{itemize}
+
+    \pagebreak 
+    \subsection{Entity Relationships}
+    \begin{itemize}
+        \item \textbf{User, song, date}: Connected via a \textit{picks} relationship. A user picks a song at a specific time. When this occurs, payment, position, queue type, and date (time) records are stored. When the user and song are known, there can be many dates. When the user and date are known, there can be many songs. When the song and date are known, there can be many users.
+        \item \textbf{Song, contributor}: Connected via a \textit{has} relationship. When this relationship occurs, a role record is stored. A song can have many contributors, a contributor may be involved with many songs.
+        \item \textbf{Song, karaoke file}: Connected via a \textit{has} relationship. A song may have many files, but each file is unique to a song.
+    \end{itemize}
+
+    \pagebreak 
+    \unsect{ERD to 3NF Relations}
+    \bigbreak \noindent 
+    The four strong non subtype entites are easily converted to relations.
     \begin{align*}
         &\text{user(\underline{user\_ID}, email, name)} \\
         &\text{song(\underline{song\_ID}, artist\_name, title)} \\
         &\text{contributor(\underline{contrib\_ID}, name)} \\
-        &\text{karaoke\_file(\underline{file\_ID}, version, song\_id$^{\dag}$)} \\
-        &\text{user\_song(\underline{user\_ID}, \underline{song\_id}, position, queue\_type, payment)} \\
+        &\text{karaoke\_file(\underline{file\_ID}, version, song\_id$^{\dag}$)}
+    .\end{align*}
+    \bigbreak \noindent 
+    \textbf{Remark.} The \textit{has} relationship between file and song is one-to-many. Thus, we add a foreign key \textit{song\_id} to the song relation in the file relation. When the file is known, there is only one song.
+
+    \bigbreak \noindent 
+    The remaining two relationships get converted to
+    \begin{align*}
+        &\text{user\_song(\underline{user\_ID}, \underline{song\_id}, \underline{date}, position, queue\_type, payment)} \\
         &\text{song\_contributor(\underline{song\_id}, \underline{contrib\_id}, role)}
     .\end{align*}
+    \bigbreak \noindent 
+    In the \textit{user\_song} relation, the relationship is many-to-many-to many, so the identifier in each relation become the primary key for the relation. The intersection data is added as non-prime attributes.
+    \bigbreak \noindent 
+    The \textit{song\_contributor} is also many-to-many, so the two identifiers become the primary key, and the intersection data \textit{role} is added as a non-prime attribute.
+    \bigbreak \noindent 
 
 
 
