@@ -1,14 +1,14 @@
 CREATE TABLE `contributor` (
   `contrib_id` int(32) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`contrib_id`),
+  PRIMARY KEY (`contrib_id`)
 );
 
 CREATE TABLE `song` (
   `song_id` int(32) NOT NULL AUTO_INCREMENT,
   `artist` varchar(100) NOT NULL,
   `title` varchar(100) NOT NULL,
-  PRIMARY KEY (`song_id`),
+  PRIMARY KEY (`song_id`)
 );
 
 CREATE TABLE `file` (
@@ -16,7 +16,7 @@ CREATE TABLE `file` (
   `version` varchar(100) NOT NULL,
   `song_id` int(32) NOT NULL,
   PRIMARY KEY (`file_id`),
-  FOREIGN KEY (`song_id`) REFERENCES `song` (`song_id`), 
+  FOREIGN KEY (`song_id`) REFERENCES `song` (`song_id`)
 );
 
 CREATE TABLE `song_contributor` (
@@ -31,7 +31,7 @@ CREATE TABLE `song_contributor` (
 CREATE TABLE `user` (
   `user_id` int(32) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`user_id`),
+  PRIMARY KEY (`user_id`)
 );
 
 CREATE TABLE `user_song` (
