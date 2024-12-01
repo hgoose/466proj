@@ -68,10 +68,10 @@
                 SELECT title, artist, version, song.song_id, file.file_id 
                     FROM song, file
                     WHERE song.song_id = file.song_id 
-                    AND song.title=:title;
+                    AND song.title LIKE :title;
             ";
             $prepare = $pdo->prepare($query);
-            $success = $prepare->execute(array(":title" => $song));
+            $success = $prepare->execute(array(":title" => "%" . $song . "%"));
             if ($success) {
                 return $prepare->fetchAll(PDO::FETCH_ASSOC);
             }
@@ -89,10 +89,10 @@
             SELECT title, artist, version, song.song_id, file.file_id 
             FROM song, file 
                 WHERE song.song_id = file.song_id
-                AND artist=:art;
+                AND artist LIKE :art;
         ";
         $prepare = $pdo->prepare($query);
-        $success = $prepare->execute(array(":art" => $artist));
+        $success = $prepare->execute(array(":art" => "%" . $artist . "%"));
         if ($success) {
             $result =  $prepare->fetchAll(PDO::FETCH_ASSOC);
             if (sizeof($result)) {
@@ -108,10 +108,10 @@
                 WHERE song.song_id = file.song_id
                 AND contributor.contrib_id = song_contributor.contrib_id
                 AND song_contributor.song_id = song.song_id
-                AND contributor.name=:name;
+                AND contributor.name LIKE :name;
         ";
         $prepare = $pdo->prepare($query);
-        $success = $prepare->execute(array(":name" => $contributor));
+        $success = $prepare->execute(array(":name" => "%" .$contributor . "%"));
         if ($success) {
             $result =  $prepare->fetchAll(PDO::FETCH_ASSOC);
             if (sizeof($result)) {
@@ -182,7 +182,7 @@
 
     function validateSong($song, $songList) {
         foreach($songList as $s) {
-            if ($song == strtolower($s)) {
+            if ($s == $song) {
                 return true;
             }
         } 
@@ -285,10 +285,10 @@
                 FROM song, contributor, song_contributor 
                     WHERE song.song_id = song_contributor.song_id 
                     AND contributor.contrib_id = song_contributor.contrib_id 
-                    AND song.title = :title;
+                    AND song.title LIKE :title;
         ";
         $prepare = $pdo->prepare($query);
-        $success = $prepare->execute(array(":title" => $song));
+        $success = $prepare->execute(array(":title" => "%" . $song . "%"));
         if ($success) {
             return $prepare->fetchAll(PDO::FETCH_ASSOC);
         }
@@ -304,7 +304,7 @@
     }
 
     function makeContribTable($pdo, $song) {
-        if (!validateSong(strtolower($song), getSongList($pdo))) { echo "<p style='text-align:center;'>Song Not Found</p>"; return; } 
+        // if (!validateSong(strtolower($song), getSongList($pdo))) { echo "<p style='text-align:center;'>Song Not Found</p>"; return; } 
         $heads = getContributorInfoHeads($pdo, $song);
         $info = queryContributors($pdo, $song);
         echo "<table class='songTable'>";
