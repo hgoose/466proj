@@ -33,27 +33,27 @@ INSERT INTO file (version, song_id)
     FROM song WHERE song.title="On the floor";
 
 INSERT INTO file (version, song_id) 
-    SELECT "Duet", song_id
+    SELECT "Trio", song_id
     FROM song WHERE song.title="I can't fold";
 
 INSERT INTO file (version, song_id) 
-    SELECT "Duet", song_id
+    SELECT "Solo", song_id
     FROM song WHERE song.title="All Cats Go to Hell";
 
 INSERT INTO file (version, song_id) 
-    SELECT "Duet", song_id
+    SELECT "Solo", song_id
     FROM song WHERE song.title="Tore up";
 
 INSERT INTO file (version, song_id) 
-    SELECT "Duet", song_id
+    SELECT "Solo", song_id
     FROM song WHERE song.title="Moving on";
 
 INSERT INTO file (version, song_id) 
-    SELECT "Duet", song_id
+    SELECT "Solo", song_id
     FROM song WHERE song.title="Dracula freestyle";
 
 INSERT INTO file (version, song_id) 
-    SELECT "Duet", song_id
+    SELECT "Solo", song_id
     FROM song WHERE song.title="Talk";
 
 INSERT INTO contributor (name) VALUES ("Isaih Rivera");

@@ -2,6 +2,8 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
+    session_start();
+    // $_SESSION["c"] = 0;
 ?>
 
 <?php
@@ -203,15 +205,62 @@
         return ($foundSong && $foundVersion ? true : false);
     }
 
+    function getSortedSongList($pdo, $queryObj, $ob, $c) {
+        $query = $queryObj->queryString;
+        $new = "";
+        for ($i = 0; $i<strlen($query)-1; $i++) {
+            if ($query[$i] == ';') continue;
+            $new[$i] = $query[$i]; 
+        }
+        
+        $new .= "ORDER BY $ob " . ($c == 0 ? "ASC" : "DESC");
+        $prepare = $pdo->prepare($new);
+        $success = $prepare->execute();
+        if ($success) {
+            return $prepare->fetchAll(PDO::FETCH_ASSOC);
+        }
+    }
+
     function makeSongTable($songHeads, $songList, $tableClass) {
+        global $pdo;
         echo "<table class=\"$tableClass\">";
             // Headings
             echo "<tr>";
             echo "<th> </th>";
             foreach($songHeads as $songHead) {
-                echo "<th> $songHead </th>";
+                echo "<th> <a id='alink' href='user.php?action=$songHead'> $songHead </a> </th>";
             }
             echo "</tr>";
+
+            if (!isset($_SESSION["c"])) {
+                $_SESSION["c"] = 0;
+            }
+
+            if (isset($_GET["action"]) && $_GET["action"] == "title") {
+                $songList = getSortedSongList($pdo, $songList, "title", $_SESSION["c"]);
+                $_SESSION["c"] = ($_SESSION["c"] + 1) % 2;    
+            }
+
+            if (isset($_GET["action"]) && $_GET["action"] == "artist") {
+                $songList = getSortedSongList($pdo, $songList, "artist", $_SESSION["c"]);
+                $_SESSION["c"] = ($_SESSION["c"] + 1) % 2;    
+            }
+
+            if (isset($_GET["action"]) && $_GET["action"] == "version") {
+                $songList = getSortedSongList($pdo, $songList, "version", $_SESSION["c"]);
+                $_SESSION["c"] = ($_SESSION["c"] + 1) % 2;    
+            }
+
+            if (isset($_GET["action"]) && $_GET["action"] == "song_id") {
+                $songList = getSortedSongList($pdo, $songList, "song_id", $_SESSION["c"]);
+                $_SESSION["c"] = ($_SESSION["c"] + 1) % 2;    
+            }
+
+            if (isset($_GET["action"]) && $_GET["action"] == "file_id") {
+                $songList = getSortedSongList($pdo, $songList, "file_id", $_SESSION["c"]);
+                $_SESSION["c"] = ($_SESSION["c"] + 1) % 2;    
+            }
+
 
             $i = 1;
             foreach($songList as $row) {
@@ -230,8 +279,6 @@
     
 
     function queryContributors($pdo, $song) {
-        // Idk just gonna noop
-
         // good to query
         $query = "
             SELECT song.title, song.artist, contributor.name, role, contributor.contrib_id 
@@ -275,9 +322,6 @@
             }
         echo "</table>";
     }
-
-
-
 
 ?>
 
